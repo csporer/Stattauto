@@ -46,11 +46,23 @@ namespace Stattauto
         {
             int parsing;
             if (int.TryParse(txteingabe.Text, out parsing))
-                GelesenerPIN = parsing;
+            {
+                EingabePIN = parsing;
+                if (EingabePIN == GelesenePIN)
+                {
+                    TresorOffen = true;
+                    AusgabeDisplay = "Schlüssel entnehmen";
+                }
+                else
+                {
+                    AusgabeDisplay = "Falsche PIN eingegeben";
+                }
+            }
             else
             {
-                txteingabe.Text = "-";
-            }            
+                txteingabe.Text = "Falsche Eingabe!";
+            }
+            this.Refresh();
         }
 
         protected override void OnPaint(PaintEventArgs pe)
@@ -60,10 +72,11 @@ namespace Stattauto
             Graphics g = pe.Graphics;
             g.DrawImage(Properties.Resources.Tresor, new Rectangle(0, 20, this.Width/2, this.Height / 2));
             g.DrawString(this.Text, this.Font, new SolidBrush(this.ForeColor), new PointF(0, 5));
-            g.DrawString("Anzeige:" , this.Font, new SolidBrush(this.ForeColor), new PointF(0 , this.Height / 2 + 25));
-            g.DrawString("Willkommen bei Stattauto", this.Font, new SolidBrush(this.ForeColor), new PointF(0, this.Height / 2 + 40));
+            g.DrawString("Displayausgabe:" , this.Font, new SolidBrush(this.ForeColor), new PointF(0 , this.Height / 2 + 25));
+            g.DrawString(AusgabeDisplay, this.Font, new SolidBrush(this.ForeColor), new PointF(0, this.Height / 2 + 40));
             g.DrawString("Debug: Gel. ID : " + GeleseneID, this.Font, new SolidBrush(this.ForeColor), new PointF(0, this.Height / 2 + 55));
             g.DrawString("Debug: Gel. PIN: " + GelesenePIN, this.Font, new SolidBrush(this.ForeColor), new PointF(0, this.Height / 2 + 70));
+            
             if (TresorOffen)
             { 
                 
@@ -77,7 +90,9 @@ namespace Stattauto
            
         }
 
-        public int GelesenerPIN { get; private set; }
+        public string AusgabeDisplay { get; private set; }
+
+        public int EingabePIN { get; private set; }
 
         public int GeleseneID { get; private set; }
 
@@ -93,6 +108,7 @@ namespace Stattauto
                 txteingabe.Enabled = true;
                 GeleseneID = ((Kundenkarte)e.Data.GetData(typeof(Kundenkarte))).KundenID;
                 GelesenePIN = ((Kundenkarte)e.Data.GetData(typeof(Kundenkarte))).PIN;
+                AusgabeDisplay = "Bitte geben Sie ihren PIN ein...";
                 this.Refresh();
             }
         }
