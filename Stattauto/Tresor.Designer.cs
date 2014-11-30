@@ -32,6 +32,12 @@
             // 
             // Tresor
             // 
+            innenleben = new TresorInnen();
+            this.Controls.Add(innenleben);
+            this.innenleben.Location = new System.Drawing.Point(0, 250);
+            this.innenleben.Enabled = false;
+           
+           
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Tresor_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Tresor_DragEnter);
             this.ResumeLayout(false);
@@ -40,6 +46,7 @@
 
         #endregion
 
+        private TresorInnen innenleben;
 
     }
 }

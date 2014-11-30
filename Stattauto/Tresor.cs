@@ -14,12 +14,15 @@ namespace Stattauto
     {
         private TextBox txteingabe = new TextBox();
         private Button btnsubmit = new Button();
+        private Button btnschliessen = new Button();
+        
         
         public Tresor()
         {
-            this.Height = 200;
+            this.Height = 500;
             this.Width = 300;
             this.AllowDrop = true;
+            AusgabeDisplay = "Willkommen bei Stattauto!";
             InitializeComponent();
             InitEigeneElemente();            
         }
@@ -28,18 +31,34 @@ namespace Stattauto
         {
             //Eingabetextbox
             txteingabe.Parent = this;
-            txteingabe.Location = new Point(this.Width / 2 - 10, 5);
+            txteingabe.Location = new Point(this.Width / 2 +10,20);
             txteingabe.Visible = true;
             txteingabe.Enabled = false;
 
             //Button bestätigung PIN
             btnsubmit.Parent = this;
-            btnsubmit.Location = new Point(this.Width / 2 - 2, 30);
+            btnsubmit.Location = new Point(this.Width / 2 +20, 50);
             btnsubmit.Visible = true;
             btnsubmit.Text = "Bestätigen";
             btnsubmit.Enabled = false;
             btnsubmit.Click += btnsubmit_Click;
-        
+
+            //Button Türe schließen
+            btnschliessen.Parent = this;
+            btnschliessen.Location = new Point(this.Width / 2 + 10,100);
+            btnschliessen.Visible = false;
+            btnschliessen.Text = "Tresor schließen";
+            btnschliessen.Width = 100;            
+            btnschliessen.Click += btnschliessen_Click;
+        }
+
+        void btnschliessen_Click(object sender, EventArgs e)
+        {
+            TresorOffen = false;
+            innenleben.Enabled = false;
+            btnschliessen.Hide();
+            AusgabeDisplay = "Willkommen bei Stattauto!";
+            this.Refresh();
         }
 
         void btnsubmit_Click(object sender, EventArgs e)
@@ -70,18 +89,24 @@ namespace Stattauto
             base.OnPaint(pe);
 
             Graphics g = pe.Graphics;
-            g.DrawImage(Properties.Resources.Tresor, new Rectangle(0, 20, this.Width/2, this.Height / 2));
             g.DrawString(this.Text, this.Font, new SolidBrush(this.ForeColor), new PointF(0, 5));
-            g.DrawString("Displayausgabe:" , this.Font, new SolidBrush(this.ForeColor), new PointF(0 , this.Height / 2 + 25));
-            g.DrawString(AusgabeDisplay, this.Font, new SolidBrush(this.ForeColor), new PointF(0, this.Height / 2 + 40));
-            g.DrawString("Debug: Gel. ID : " + GeleseneID, this.Font, new SolidBrush(this.ForeColor), new PointF(0, this.Height / 2 + 55));
-            g.DrawString("Debug: Gel. PIN: " + GelesenePIN, this.Font, new SolidBrush(this.ForeColor), new PointF(0, this.Height / 2 + 70));
+            g.DrawImage(Properties.Resources.Tresor, new Rectangle(0, 40, 150, 150));
             
-            if (TresorOffen)
-            { 
-                
+            g.DrawString("Displayausgabe:" , this.Font, new SolidBrush(this.ForeColor), new PointF(0 , 200));
+            g.DrawString(AusgabeDisplay, this.Font, new SolidBrush(this.ForeColor), new PointF(0, 230));
+          
+            if (!TresorOffen)
+            {
+                g.DrawString("Tresor ist geschlossen", this.Font, new SolidBrush(System.Drawing.Color.Red), new PointF(0, 20));
             }
-
+            else
+            {
+                g.DrawString("Tresor ist geöffnet", this.Font, new SolidBrush(System.Drawing.Color.Green), new PointF(0, 20));
+                
+                innenleben.LEDFarbe2 = Color.Green;
+                innenleben.Enabled = true;
+                btnschliessen.Show();
+            }
         }
 
         private void Tresor_DragEnter(object sender, DragEventArgs e)

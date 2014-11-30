@@ -35,9 +35,9 @@
             // tresor1
             // 
             this.tresor1.AllowDrop = true;
-            this.tresor1.Location = new System.Drawing.Point(37, 128);
+            this.tresor1.Location = new System.Drawing.Point(37, 99);
             this.tresor1.Name = "tresor1";
-            this.tresor1.Size = new System.Drawing.Size(242, 182);
+            this.tresor1.Size = new System.Drawing.Size(273, 358);
             this.tresor1.TabIndex = 1;
             this.tresor1.Text = "Tresor 1";
             // 
@@ -55,7 +55,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(618, 466);
+            this.ClientSize = new System.Drawing.Size(623, 518);
             this.Controls.Add(this.tresor1);
             this.Controls.Add(this.kundenkarte1);
             this.Name = "Form1";
