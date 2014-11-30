@@ -34,12 +34,13 @@
             this.btnSchlu1 = new System.Windows.Forms.CheckBox();
             this.btnSchlu2 = new System.Windows.Forms.CheckBox();
             this.btnSchlu3 = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblSchlu1
             // 
             this.lblSchlu1.AutoSize = true;
-            this.lblSchlu1.Location = new System.Drawing.Point(3, 87);
+            this.lblSchlu1.Location = new System.Drawing.Point(3, 96);
             this.lblSchlu1.Name = "lblSchlu1";
             this.lblSchlu1.Size = new System.Drawing.Size(35, 13);
             this.lblSchlu1.TabIndex = 3;
@@ -48,7 +49,7 @@
             // lblSchlu2
             // 
             this.lblSchlu2.AutoSize = true;
-            this.lblSchlu2.Location = new System.Drawing.Point(81, 87);
+            this.lblSchlu2.Location = new System.Drawing.Point(81, 96);
             this.lblSchlu2.Name = "lblSchlu2";
             this.lblSchlu2.Size = new System.Drawing.Size(35, 13);
             this.lblSchlu2.TabIndex = 4;
@@ -58,7 +59,7 @@
             // lblSchlu3
             // 
             this.lblSchlu3.AutoSize = true;
-            this.lblSchlu3.Location = new System.Drawing.Point(162, 87);
+            this.lblSchlu3.Location = new System.Drawing.Point(162, 96);
             this.lblSchlu3.Name = "lblSchlu3";
             this.lblSchlu3.Size = new System.Drawing.Size(35, 13);
             this.lblSchlu3.TabIndex = 5;
@@ -68,7 +69,7 @@
             // 
             this.btnSchlu1.Appearance = System.Windows.Forms.Appearance.Button;
             this.btnSchlu1.AutoSize = true;
-            this.btnSchlu1.Location = new System.Drawing.Point(6, 61);
+            this.btnSchlu1.Location = new System.Drawing.Point(6, 70);
             this.btnSchlu1.Name = "btnSchlu1";
             this.btnSchlu1.Size = new System.Drawing.Size(71, 23);
             this.btnSchlu1.TabIndex = 7;
@@ -80,7 +81,7 @@
             // 
             this.btnSchlu2.Appearance = System.Windows.Forms.Appearance.Button;
             this.btnSchlu2.AutoSize = true;
-            this.btnSchlu2.Location = new System.Drawing.Point(83, 61);
+            this.btnSchlu2.Location = new System.Drawing.Point(83, 70);
             this.btnSchlu2.Name = "btnSchlu2";
             this.btnSchlu2.Size = new System.Drawing.Size(71, 23);
             this.btnSchlu2.TabIndex = 8;
@@ -92,7 +93,7 @@
             // 
             this.btnSchlu3.Appearance = System.Windows.Forms.Appearance.Button;
             this.btnSchlu3.AutoSize = true;
-            this.btnSchlu3.Location = new System.Drawing.Point(160, 61);
+            this.btnSchlu3.Location = new System.Drawing.Point(160, 70);
             this.btnSchlu3.Name = "btnSchlu3";
             this.btnSchlu3.Size = new System.Drawing.Size(71, 23);
             this.btnSchlu3.TabIndex = 9;
@@ -100,10 +101,20 @@
             this.btnSchlu3.UseVisualStyleBackColor = true;
             this.btnSchlu3.CheckedChanged += new System.EventHandler(this.btnSchlu3_CheckedChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(81, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(66, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Tresor innen";
+            // 
             // TresorInnen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSchlu3);
             this.Controls.Add(this.btnSchlu2);
             this.Controls.Add(this.btnSchlu1);
@@ -125,5 +136,6 @@
         private System.Windows.Forms.CheckBox btnSchlu1;
         private System.Windows.Forms.CheckBox btnSchlu2;
         private System.Windows.Forms.CheckBox btnSchlu3;
+        private System.Windows.Forms.Label label1;
     }
 }

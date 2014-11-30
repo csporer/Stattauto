@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Buchungsliste xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Buchungen>
+    <Buchung>
+      <NutzerID>1000</NutzerID>
+      <PIN>1111</PIN>
+      <AnfangBuchung>2014-11-30T15:00:00</AnfangBuchung>
+      <EndeBuchung>2014-11-30T20:00:00</EndeBuchung>
+      <VorgesehenesFahrzeug>1</VorgesehenesFahrzeug>
+      <FahrzeugInGebrauch>false</FahrzeugInGebrauch>
+    </Buchung>
+    <Buchung>
+      <NutzerID>2000</NutzerID>
+      <PIN>2222</PIN>
+      <AnfangBuchung>2014-11-30T18:00:00</AnfangBuchung>
+      <EndeBuchung>2014-11-30T19:00:00</EndeBuchung>
+      <VorgesehenesFahrzeug>2</VorgesehenesFahrzeug>
+      <FahrzeugInGebrauch>false</FahrzeugInGebrauch>
+    </Buchung>
+  </Buchungen>
+</Buchungsliste>

@@ -1,4 +1,5 @@
-﻿namespace Stattauto
+﻿using System.Drawing;
+namespace Stattauto
 {
     partial class Tresor
     {
@@ -20,7 +21,6 @@
             base.Dispose(disposing);
         }
 
-        #region Vom Komponenten-Designer generierter Code
 
         /// <summary>
         /// Erforderliche Methode für die Designerunterstützung. 
@@ -41,10 +41,40 @@
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Tresor_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Tresor_DragEnter);
             this.ResumeLayout(false);
-
+            InitEigeneElemente();
         }
 
-        #endregion
+        
+        private void InitEigeneElemente()
+        {
+            //Eingabetextbox
+            txteingabe.Parent = this;
+            txteingabe.Location = new Point(this.Width / 2 + 20, 20);
+            txteingabe.Visible = true;
+            txteingabe.Enabled = false;
+            txteingabe.UseSystemPasswordChar = true;
+            txteingabe.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            txteingabe.Width = btnsubmit.Width;
+            txteingabe.MaxLength = 4;
+            txteingabe.Font = new System.Drawing.Font(this.Font.FontFamily, 12f);
+
+            //Button bestätigung PIN
+            btnsubmit.Parent = this;
+            btnsubmit.Location = new Point(this.Width / 2 + 20, 50);
+            btnsubmit.Visible = true;
+            btnsubmit.Text = "Bestätigen";
+            btnsubmit.Enabled = false;
+            btnsubmit.Click += btnsubmit_Click;
+
+            //Button Türe schließen
+            btnschliessen.Parent = this;
+            btnschliessen.Location = new Point(this.Width / 2 + 10, 100);
+            btnschliessen.Visible = false;
+            btnschliessen.Text = "Tresor schließen";
+            btnschliessen.Width = 100;
+            btnschliessen.Click += btnschliessen_Click;
+        }
+
 
         private TresorInnen innenleben;
 

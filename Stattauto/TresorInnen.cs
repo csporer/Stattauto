@@ -12,13 +12,13 @@ namespace Stattauto
 {
     public partial class TresorInnen : UserControl
     {
-        private bool _türreferenz;
-
+        private Tresor _tresor = null;
+        private Schlüsselerkennung _schluesselerkennung;
         public TresorInnen()
         {
             InitializeComponent();
             LEDFarbe1 = LEDFarbe2 = LEDFarbe3 = Color.Red;
-            Schluessel1 = Schluessel2 = Schluessel3 = StatusSchluessel.vorhanden;
+            Schluessel1 = Schluessel2 = Schluessel3 = StatusSchluessel.vorhanden;            
         }
 
         public Color LEDFarbe1 { get; set; }
@@ -28,6 +28,8 @@ namespace Stattauto
         public StatusSchluessel Schluessel1 { get; set; }
         public StatusSchluessel Schluessel2 { get; set; }
         public StatusSchluessel Schluessel3 { get; set; }
+
+        public int ZuletztEntnommen { get; private set; }
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -50,16 +52,24 @@ namespace Stattauto
         }
 
 
+        public void SetTresor(Tresor tres)
+        {
+            _tresor = tres;
+            _schluesselerkennung = new Schlüsselerkennung(_tresor);
+        }
+
 
         private void btnSchlu1_CheckedChanged(object sender, EventArgs e)
         {
             if (btnSchlu1.Checked)
             {
                 Schluessel1 = StatusSchluessel.entnommen;
+                ZuletztEntnommen = 1;
+                _schluesselerkennung.PruefeEntnahme();
             }
             else
             {
-                Schluessel1 = StatusSchluessel.vorhanden;
+                Schluessel1 = StatusSchluessel.vorhanden;                
             }
         }
 
@@ -68,6 +78,8 @@ namespace Stattauto
             if (btnSchlu2.Checked)
             {
                 Schluessel2 = StatusSchluessel.entnommen;
+                ZuletztEntnommen = 2;
+                _schluesselerkennung.PruefeEntnahme();
             }
             else
             {
@@ -79,16 +91,17 @@ namespace Stattauto
         {
             if (btnSchlu3.Checked)
             {
+                ZuletztEntnommen = 3;
                 Schluessel3 = StatusSchluessel.entnommen;
+                _schluesselerkennung.PruefeEntnahme();
             }
             else
             {
                 Schluessel3 = StatusSchluessel.vorhanden;
             }
-        }
-
-       
+        } 
     }
+
     public enum StatusSchluessel
     {   
         vorhanden,
