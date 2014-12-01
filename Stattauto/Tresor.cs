@@ -26,11 +26,11 @@ namespace Stattauto
         {
             this.Height = 500;
             this.Width = 300;
-            this.AllowDrop = true;
-            AusgabeDisplay = "Willkommen bei Stattauto!";
+            this.AllowDrop = true;            
             InitializeComponent();
             innenleben.SetTresor(this);
             _schluesselerkennung = new Schlüsselerkennung(this);
+            SetDisplayText("Willkommen bei Stattauto!");
             //ErstelleStandardbuchungsliste();
 
             Buchungen = XML.Load<Buchungsliste>(xmlPfad);
@@ -58,8 +58,8 @@ namespace Stattauto
             g.DrawString(this.Text, this.Font, new SolidBrush(this.ForeColor), new PointF(0, 5));
             g.DrawImage(Properties.Resources.Tresor, new Rectangle(0, 40, 150, 150));
 
-            g.DrawString("Displayausgabe:", this.Font, new SolidBrush(this.ForeColor), new PointF(0, 200));
-            g.DrawString(AusgabeDisplay, this.Font, new SolidBrush(this.ForeColor), new PointF(0, 230));
+            //g.DrawString("Displayausgabe:", this.Font, new SolidBrush(this.ForeColor), new PointF(0, 200));
+            //g.DrawString(AusgabeDisplay, this.Font, new SolidBrush(this.ForeColor), new PointF(0, 230));
 
             if (!TresorOffen)
             {
@@ -82,9 +82,9 @@ namespace Stattauto
             TresorOffen = false;
             innenleben.Enabled = false;
             btnschliessen.Hide();
-            AusgabeDisplay = "Willkommen bei Stattauto!";
-            txteingabe.Enabled = false;
-            btnsubmit.Enabled = false;
+            SetDisplayText("Willkommen bei Stattauto!");
+            //txteingabe.Enabled = false;
+            //btnsubmit.Enabled = false;
             this.Refresh();
         }
 
@@ -97,16 +97,20 @@ namespace Stattauto
                 if (EingabePIN == GelesenePIN)
                 {
                     TresorOffen = true;
-                    AusgabeDisplay = "Schlüssel entnehmen";
+                    SetDisplayText("Schlüssel entnehmen");
+                    txteingabe.Enabled = false;
+                    btnsubmit.Enabled = false;
                 }
                 else
                 {
-                    AusgabeDisplay = "Falsche PIN eingegeben";
+                    SetDisplayText("Falsche PIN eingegeben");
+                    System.Media.SystemSounds.Beep.Play();
                 }
             }
             else
             {
                 txteingabe.Text = "Falsche Eingabe!";
+                System.Media.SystemSounds.Hand.Play();
             }
             txteingabe.Text = string.Empty;
             this.Refresh();
@@ -114,11 +118,27 @@ namespace Stattauto
 
         #endregion
 
+        public void SetDisplayText(string text)
+        { display.UpdateText(text); }
+
+        void txteingabe_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+            {
+                btnsubmit.PerformClick();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+        }
+
         #region DragDrop
 
         private void Tresor_DragEnter(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Copy;
+            if (!TresorOffen)
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
         }        
 
         private void Tresor_DragDrop(object sender, DragEventArgs e)
@@ -129,15 +149,14 @@ namespace Stattauto
                 txteingabe.Enabled = true;
                 GeleseneID = ((Kundenkarte)e.Data.GetData(typeof(Kundenkarte))).KundenID;
                 GelesenePIN = ((Kundenkarte)e.Data.GetData(typeof(Kundenkarte))).PIN;
-                AusgabeDisplay = "Bitte geben Sie ihren PIN ein...";
+                SetDisplayText("Bitte geben Sie ihren PIN ein...");
                 this.Refresh();
             }
         }
         #endregion
 
         #region Parameter
-        public string AusgabeDisplay { get; set; }
-
+        
         public int EingabePIN { get; private set; }
 
         public int GeleseneID { get; private set; }

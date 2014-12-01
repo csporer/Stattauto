@@ -33,6 +33,7 @@ namespace Stattauto
             // Tresor
             // 
             innenleben = new TresorInnen();
+            display = new Display();
             this.Controls.Add(innenleben);
             this.innenleben.Location = new System.Drawing.Point(0, 250);
             this.innenleben.Enabled = false;
@@ -57,6 +58,7 @@ namespace Stattauto
             txteingabe.Width = btnsubmit.Width;
             txteingabe.MaxLength = 4;
             txteingabe.Font = new System.Drawing.Font(this.Font.FontFamily, 12f);
+            txteingabe.KeyDown += txteingabe_KeyDown;
 
             //Button bestätigung PIN
             btnsubmit.Parent = this;
@@ -73,10 +75,16 @@ namespace Stattauto
             btnschliessen.Text = "Tresor schließen";
             btnschliessen.Width = 100;
             btnschliessen.Click += btnschliessen_Click;
+
+            //Display
+            display.Parent = this;
+            display.Location = new Point(0, 200);
+            display.Visible = true;
         }
 
-
+       
         private TresorInnen innenleben;
+        private Display display;
 
     }
 }

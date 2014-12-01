@@ -35,7 +35,7 @@
             // tresor1
             // 
             this.tresor1.AllowDrop = true;
-            this.tresor1.AusgabeDisplay = "Willkommen bei Stattauto!";
+            this.tresor1.SetDisplayText("Willkommen bei Stattauto!");
             this.tresor1.Location = new System.Drawing.Point(37, 99);
             this.tresor1.Name = "tresor1";
             this.tresor1.Size = new System.Drawing.Size(273, 358);

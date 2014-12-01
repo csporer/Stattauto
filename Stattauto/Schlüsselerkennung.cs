@@ -31,11 +31,11 @@ namespace Stattauto
         {           
                 if (_innen.ZuletztEntnommen == 2)
                 {
-                    _tresor.AusgabeDisplay = "Bitte Türe schließen";
+                    _tresor.SetDisplayText("Bitte Türe schließen");
                 }
                 else
                 {
-                    _tresor.AusgabeDisplay = "Falschen Schlüssel entnommen!";                    
+                    _tresor.SetDisplayText("Falschen Schlüssel entnommen!");                    
                     
                 }
                 _tresor.Refresh();
