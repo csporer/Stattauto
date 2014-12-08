@@ -49,8 +49,19 @@ namespace Stattauto
 
             XmlSerializer ser = new XmlSerializer(typeof(T));
             StreamReader sr = new StreamReader(savePath);
-            T saved = (T)ser.Deserialize(sr);
-            sr.Close();
+            T saved;
+
+            try
+            {
+                saved = (T)ser.Deserialize(sr);
+                sr.Close();
+            }
+            catch (Exception exc)
+            {
+                sr.Close();
+                throw exc;
+            }
+            
             return saved;
 
         }

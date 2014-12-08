@@ -28,8 +28,7 @@ namespace Stattauto
             g.DrawImage(Properties.Resources.Karte, new Rectangle(0, 0, this.Width, this.Height));
             g.DrawString(this.Text, this.Font, new SolidBrush(this.ForeColor), new PointF(10, 5));
             g.DrawString("ID : " + KundenID.ToString(),this.Font,new SolidBrush(this.ForeColor),new PointF(10,20));
-            //g.DrawString("PIN: " + PIN.ToString(), this.Font, new SolidBrush(this.ForeColor), new PointF(10, 35));
-        
+            //g.DrawString("PIN: " + PIN.ToString(), this.Font, new SolidBrush(this.ForeColor), new PointF(10, 35));        
         }
 
         public int KundenID { get;  set; }
@@ -38,6 +37,16 @@ namespace Stattauto
         private void Kundenkarte_MouseDown(object sender, MouseEventArgs e)
         {
            this.DoDragDrop(this, DragDropEffects.Copy);
+        }
+
+        private void Kundenkarte_MouseEnter(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Hand;
+        }
+
+        private void Kundenkarte_MouseLeave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
         }
     }
 }

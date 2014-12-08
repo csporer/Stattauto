@@ -33,6 +33,8 @@
             // Kundenkarte
             // 
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Kundenkarte_MouseDown);
+            this.MouseEnter += new System.EventHandler(this.Kundenkarte_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.Kundenkarte_MouseLeave);
             this.ResumeLayout(false);
 
         }

@@ -14,15 +14,13 @@ namespace Stattauto
 {
     public partial class Tresor : Control
     {
-        private string xmlPfad = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),"Buchungen.xml");
+        public static string xmlPfad = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),"Buchungen.xml");
         private TextBox txteingabe = new TextBox();
         private Button btnsubmit = new Button();
         private Button btnschliessen = new Button();
         private Schlüsselerkennung _schluesselerkennung;
         private Buchungsliste Buchungen;
-        
-        
-        
+                
         public Tresor()
         {
             this.Height = 500;
@@ -35,7 +33,7 @@ namespace Stattauto
             SetDisplayText("Willkommen bei Stattauto!");
             //ErstelleStandardbuchungsliste();
 
-            Buchungen = XML.Load<Buchungsliste>(xmlPfad);
+            //Buchungen = XML.Load<Buchungsliste>(xmlPfad);
         }
 
         private void ErstelleStandardbuchungsliste()
@@ -154,33 +152,49 @@ namespace Stattauto
         {
             if (!TresorOffen)
             {
-                e.Effect = DragDropEffects.Copy;
+                e.Effect = DragDropEffects.Copy; 
+                              
             }
         }        
 
         private void Tresor_DragDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(Kundenkarte)))
+            try
             {
-                GeleseneID = ((Kundenkarte)e.Data.GetData(typeof(Kundenkarte))).KundenID;
-                GelesenePIN = ((Kundenkarte)e.Data.GetData(typeof(Kundenkarte))).PIN;
+                Buchungen = XML.Load<Buchungsliste>(xmlPfad);
 
-                foreach (Buchung buch in Buchungen.Buchungen)
+
+                if (e.Data.GetDataPresent(typeof(Kundenkarte)))
                 {
-                    if (buch.NutzerID == GeleseneID)
-                    {
-                        btnsubmit.Enabled = true;
-                        txteingabe.Enabled = true;
-                        AktiveBuchung = buch;
-                        SetDisplayText("Bitte geben Sie ihren PIN ein...");
-                        TimerPin.Start();
-                        this.Refresh();
-                        return;
-                    }               
-                }
+                    GeleseneID = ((Kundenkarte)e.Data.GetData(typeof(Kundenkarte))).KundenID;
+                    GelesenePIN = ((Kundenkarte)e.Data.GetData(typeof(Kundenkarte))).PIN;
 
-                SetDisplayText("Keine Buchung vorhanden!");
+                    bool vergleich1, vergleich2;
+                    foreach (Buchung buch in Buchungen.Buchungen)
+                    {
+                        vergleich1 = buch.EndeBuchung > Systemzeit;
+                        vergleich2 = Systemzeit > buch.AnfangBuchung;
+                        if (buch.NutzerID == GeleseneID && vergleich1  && vergleich2)
+                        {
+                            btnsubmit.Enabled = true;
+                            txteingabe.Enabled = true;
+                            AktiveBuchung = buch;
+                            SetDisplayText("Bitte geben Sie ihren PIN ein...");
+                            TimerPin.Start();
+                            this.Refresh();
+                            return;
+                        }
+                    }
+
+                    SetDisplayText("Keine Buchung vorhanden!");
+                }
             }
+            catch (Exception exc)
+            {
+                Buchungen = null;                
+                MessageBox.Show("XML Eingabe prüfen: \n" + exc.InnerException.Message.ToString());
+            }
+            
 
         }
         #endregion
@@ -194,6 +208,8 @@ namespace Stattauto
         public bool TresorOffen { get; private set; }
 
         public int GelesenePIN { get; private set; }
+
+        public DateTime Systemzeit { get; set; }
 
         public Buchung AktiveBuchung { get; private set; }
 

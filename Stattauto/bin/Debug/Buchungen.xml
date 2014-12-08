@@ -4,8 +4,8 @@
     <Buchung>
       <NutzerID>1234</NutzerID>
       <PIN>1111</PIN>
-      <AnfangBuchung>2014-11-30T15:00:00</AnfangBuchung>
-      <EndeBuchung>2014-11-30T20:00:00</EndeBuchung>
+      <AnfangBuchung>2014-12-08T15:00:00</AnfangBuchung>
+      <EndeBuchung>2014-12-10T20:00:00</EndeBuchung>
       <VorgesehenesFahrzeug>1</VorgesehenesFahrzeug>
       <FahrzeugInGebrauch>false</FahrzeugInGebrauch>
     </Buchung>
