@@ -22,12 +22,14 @@ namespace Stattauto
         private Buchungsliste Buchungen;
         
         
+        
         public Tresor()
         {
             this.Height = 500;
             this.Width = 300;
             this.AllowDrop = true;            
             InitializeComponent();
+            InitEigeneElemente();
             innenleben.SetTresor(this);
             _schluesselerkennung = new Schlüsselerkennung(this);
             SetDisplayText("Willkommen bei Stattauto!");
@@ -68,8 +70,7 @@ namespace Stattauto
             else
             {
                 g.DrawString("Tresor ist geöffnet", this.Font, new SolidBrush(System.Drawing.Color.Green), new PointF(0, 20));
-
-                innenleben.LEDFarbe2 = Color.Green;
+                                
                 innenleben.Enabled = true;
                 btnschliessen.Show();
             }
@@ -85,6 +86,7 @@ namespace Stattauto
             SetDisplayText("Willkommen bei Stattauto!");
             //txteingabe.Enabled = false;
             //btnsubmit.Enabled = false;
+            innenleben.StopPiep();
             this.Refresh();
         }
 
@@ -94,8 +96,23 @@ namespace Stattauto
             if (int.TryParse(txteingabe.Text, out parsing))
             {
                 EingabePIN = parsing;
-                if (EingabePIN == GelesenePIN)
+                if (EingabePIN == AktiveBuchung.PIN)
                 {
+                    switch (AktiveBuchung.VorgesehenesFahrzeug)
+                    {
+                        case 1:
+                            innenleben.LEDFarbe1 = Color.Green;
+                            break;
+                        case 2:
+                            innenleben.LEDFarbe2 = Color.Green;
+                            break;
+                        case 3:
+                            innenleben.LEDFarbe3 = Color.Green;
+                            break;
+                        default:
+                            break;
+                    }
+
                     TresorOffen = true;
                     SetDisplayText("Schlüssel entnehmen");
                     txteingabe.Enabled = false;
@@ -145,13 +162,26 @@ namespace Stattauto
         {
             if (e.Data.GetDataPresent(typeof(Kundenkarte)))
             {
-                btnsubmit.Enabled = true;
-                txteingabe.Enabled = true;
                 GeleseneID = ((Kundenkarte)e.Data.GetData(typeof(Kundenkarte))).KundenID;
                 GelesenePIN = ((Kundenkarte)e.Data.GetData(typeof(Kundenkarte))).PIN;
-                SetDisplayText("Bitte geben Sie ihren PIN ein...");
-                this.Refresh();
+
+                foreach (Buchung buch in Buchungen.Buchungen)
+                {
+                    if (buch.NutzerID == GeleseneID)
+                    {
+                        btnsubmit.Enabled = true;
+                        txteingabe.Enabled = true;
+                        AktiveBuchung = buch;
+                        SetDisplayText("Bitte geben Sie ihren PIN ein...");
+                        TimerPin.Start();
+                        this.Refresh();
+                        return;
+                    }               
+                }
+
+                SetDisplayText("Keine Buchung vorhanden!");
             }
+
         }
         #endregion
 
@@ -164,6 +194,19 @@ namespace Stattauto
         public bool TresorOffen { get; private set; }
 
         public int GelesenePIN { get; private set; }
+
+        public Buchung AktiveBuchung { get; private set; }
+
         #endregion Parameter       
+
+        private void TimerPin_Tick(object sender, EventArgs e)
+        {
+            SetDisplayText("Willkommen bei Stattauto!");
+            txteingabe.Enabled = false;
+            btnsubmit.Enabled = false;
+            
+            TimerPin.Stop();
+            this.Refresh();
+        }
     }
 }

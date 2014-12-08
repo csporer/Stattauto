@@ -28,21 +28,49 @@ namespace Stattauto
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Tresor));
+            this.TimerPin = new System.Windows.Forms.Timer(this.components);
+            this.innenleben = new Stattauto.TresorInnen();
+            this.display = new Stattauto.Display();
             this.SuspendLayout();
+            // 
+            // TimerPin
+            // 
+            this.TimerPin.Interval = 5000;
+            this.TimerPin.Tick += new System.EventHandler(this.TimerPin_Tick);
+            // 
+            // innenleben
+            // 
+            this.innenleben.Enabled = false;
+            this.innenleben.LEDFarbe1 = System.Drawing.Color.Red;
+            this.innenleben.LEDFarbe2 = System.Drawing.Color.Red;
+            this.innenleben.LEDFarbe3 = System.Drawing.Color.Red;
+            this.innenleben.Location = new System.Drawing.Point(0, 250);
+            this.innenleben.Name = "innenleben";
+            this.innenleben.Schluessel1 = Stattauto.StatusSchluessel.vorhanden;
+            this.innenleben.Schluessel2 = Stattauto.StatusSchluessel.vorhanden;
+            this.innenleben.Schluessel3 = Stattauto.StatusSchluessel.vorhanden;
+            this.innenleben.Size = new System.Drawing.Size(248, 119);
+            this.innenleben.TabIndex = 0;
+            // 
+            // display
+            // 
+            this.display.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("display.BackgroundImage")));
+            this.display.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.display.Location = new System.Drawing.Point(0, 0);
+            this.display.Name = "display";
+            this.display.Size = new System.Drawing.Size(352, 39);
+            this.display.TabIndex = 0;
+            this.display.Textfarbe = System.Drawing.Color.Empty;
             // 
             // Tresor
             // 
-            innenleben = new TresorInnen();
-            display = new Display();
-            this.Controls.Add(innenleben);
-            this.innenleben.Location = new System.Drawing.Point(0, 250);
-            this.innenleben.Enabled = false;
-           
-           
+            this.Controls.Add(this.innenleben);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Tresor_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Tresor_DragEnter);
             this.ResumeLayout(false);
-            InitEigeneElemente();
+
         }
 
         
@@ -80,11 +108,13 @@ namespace Stattauto
             display.Parent = this;
             display.Location = new Point(0, 200);
             display.Visible = true;
+            display.Textfarbe = Color.White;
         }
 
        
         private TresorInnen innenleben;
         private Display display;
+        private System.Windows.Forms.Timer TimerPin;
 
     }
 }

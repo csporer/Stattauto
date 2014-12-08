@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblSchlu1 = new System.Windows.Forms.Label();
             this.lblSchlu2 = new System.Windows.Forms.Label();
             this.lblSchlu3 = new System.Windows.Forms.Label();
@@ -35,6 +36,7 @@
             this.btnSchlu2 = new System.Windows.Forms.CheckBox();
             this.btnSchlu3 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.TimerEntnahme = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lblSchlu1
@@ -73,6 +75,7 @@
             this.btnSchlu1.Name = "btnSchlu1";
             this.btnSchlu1.Size = new System.Drawing.Size(71, 23);
             this.btnSchlu1.TabIndex = 7;
+            this.btnSchlu1.Tag = "1";
             this.btnSchlu1.Text = "Schlüssel 1";
             this.btnSchlu1.UseVisualStyleBackColor = true;
             this.btnSchlu1.CheckedChanged += new System.EventHandler(this.btnSchlu1_CheckedChanged);
@@ -85,6 +88,7 @@
             this.btnSchlu2.Name = "btnSchlu2";
             this.btnSchlu2.Size = new System.Drawing.Size(71, 23);
             this.btnSchlu2.TabIndex = 8;
+            this.btnSchlu2.Tag = "2";
             this.btnSchlu2.Text = "Schlüssel 2";
             this.btnSchlu2.UseVisualStyleBackColor = true;
             this.btnSchlu2.CheckedChanged += new System.EventHandler(this.btnSchlu2_CheckedChanged);
@@ -97,6 +101,7 @@
             this.btnSchlu3.Name = "btnSchlu3";
             this.btnSchlu3.Size = new System.Drawing.Size(71, 23);
             this.btnSchlu3.TabIndex = 9;
+            this.btnSchlu3.Tag = "3";
             this.btnSchlu3.Text = "Schlüssel 3";
             this.btnSchlu3.UseVisualStyleBackColor = true;
             this.btnSchlu3.CheckedChanged += new System.EventHandler(this.btnSchlu3_CheckedChanged);
@@ -109,6 +114,11 @@
             this.label1.Size = new System.Drawing.Size(66, 13);
             this.label1.TabIndex = 10;
             this.label1.Text = "Tresor innen";
+            // 
+            // TimerEntnahme
+            // 
+            this.TimerEntnahme.Interval = 1000;
+            this.TimerEntnahme.Tick += new System.EventHandler(this.TimerEntnahme_Tick);
             // 
             // TresorInnen
             // 
@@ -137,5 +147,6 @@
         private System.Windows.Forms.CheckBox btnSchlu2;
         private System.Windows.Forms.CheckBox btnSchlu3;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer TimerEntnahme;
     }
 }

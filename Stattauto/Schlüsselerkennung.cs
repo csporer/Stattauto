@@ -9,7 +9,8 @@ namespace Stattauto
     class Schlüsselerkennung
     {
         private Tresor _tresor;
-        private TresorInnen _innen;
+        private TresorInnen _innen;        
+        
         public Schlüsselerkennung(Tresor tresor)
         {
             _tresor = tresor;
@@ -27,19 +28,27 @@ namespace Stattauto
             }
 
         }
-        public void PruefeEntnahme()
-        {           
-                if (_innen.ZuletztEntnommen == 2)
+        public void PruefeEntnahme(StatusSchluessel status)
+        {
+            if (_innen.ZuletztZurueck == _innen.ZuletztEntnommen && status == StatusSchluessel.vorhanden)
+            {
+                _innen.StopPiep();                
+                return;
+            }
+	
+
+                if (_innen.ZuletztEntnommen == _tresor.AktiveBuchung.VorgesehenesFahrzeug && status == StatusSchluessel.entnommen)
                 {
                     _tresor.SetDisplayText("Bitte Türe schließen");
                 }
                 else
                 {
-                    _tresor.SetDisplayText("Falschen Schlüssel entnommen!");                    
-                    
+                    _tresor.SetDisplayText("Falschen Schlüssel entnommen!");
+                    _innen.StartPiep();                    
                 }
-                _tresor.Refresh();
+            _tresor.Refresh(); 
             }
-        }
+           
     }
+}
 

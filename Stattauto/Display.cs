@@ -17,6 +17,8 @@ namespace Stattauto
             InitializeComponent();
         }
 
+        public Color Textfarbe { get; set; }
+
         public string AnzeigeText { get; private set; }
 
         public void UpdateText(string Text)
@@ -29,7 +31,7 @@ namespace Stattauto
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            g.DrawString(AnzeigeText, new Font(this.Font.FontFamily,13), new SolidBrush(Color.Red), new PointF(5, this.Height / 2 - 10));
+            g.DrawString(AnzeigeText, new Font(this.Font.FontFamily, 13), new SolidBrush(Textfarbe), new PointF(5, this.Height / 2 - 10));
             base.OnPaint(e);
         }
     }

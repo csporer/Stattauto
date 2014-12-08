@@ -13,7 +13,8 @@ namespace Stattauto
     public partial class TresorInnen : UserControl
     {
         private Tresor _tresor = null;
-        private Schlüsselerkennung _schluesselerkennung;
+        private Schlüsselerkennung _schluesselerkennung;              
+       
         public TresorInnen()
         {
             InitializeComponent();
@@ -30,6 +31,8 @@ namespace Stattauto
         public StatusSchluessel Schluessel3 { get; set; }
 
         public int ZuletztEntnommen { get; private set; }
+
+        public int ZuletztZurueck { get; private set; }
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -64,13 +67,14 @@ namespace Stattauto
             if (btnSchlu1.Checked)
             {
                 Schluessel1 = StatusSchluessel.entnommen;
-                ZuletztEntnommen = 1;
-                _schluesselerkennung.PruefeEntnahme();
+                ZuletztEntnommen = 1;                
             }
             else
             {
-                Schluessel1 = StatusSchluessel.vorhanden;                
+                Schluessel1 = StatusSchluessel.vorhanden;
+                ZuletztZurueck = 1;
             }
+            _schluesselerkennung.PruefeEntnahme(Schluessel1);
         }
 
         private void btnSchlu2_CheckedChanged(object sender, EventArgs e)
@@ -78,13 +82,14 @@ namespace Stattauto
             if (btnSchlu2.Checked)
             {
                 Schluessel2 = StatusSchluessel.entnommen;
-                ZuletztEntnommen = 2;
-                _schluesselerkennung.PruefeEntnahme();
+                ZuletztEntnommen = 2;                
             }
             else
             {
                 Schluessel2 = StatusSchluessel.vorhanden;
+                ZuletztZurueck = 2;
             }
+            _schluesselerkennung.PruefeEntnahme(Schluessel2);
         }
 
         private void btnSchlu3_CheckedChanged(object sender, EventArgs e)
@@ -92,14 +97,30 @@ namespace Stattauto
             if (btnSchlu3.Checked)
             {
                 ZuletztEntnommen = 3;
-                Schluessel3 = StatusSchluessel.entnommen;
-                _schluesselerkennung.PruefeEntnahme();
+                Schluessel3 = StatusSchluessel.entnommen;                
             }
             else
             {
                 Schluessel3 = StatusSchluessel.vorhanden;
+                ZuletztZurueck = 3;
             }
+            _schluesselerkennung.PruefeEntnahme(Schluessel3);
+        }
+
+        private void TimerEntnahme_Tick(object sender, EventArgs e)
+        {
+            System.Media.SystemSounds.Beep.Play();           
         } 
+
+        public void StartPiep()
+        { 
+            TimerEntnahme.Start(); 
+        }
+
+        public void StopPiep()
+        {
+            TimerEntnahme.Stop();
+        }
     }
 
     public enum StatusSchluessel

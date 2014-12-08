@@ -2,7 +2,7 @@
 <Buchungsliste xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Buchungen>
     <Buchung>
-      <NutzerID>1000</NutzerID>
+      <NutzerID>1234</NutzerID>
       <PIN>1111</PIN>
       <AnfangBuchung>2014-11-30T15:00:00</AnfangBuchung>
       <EndeBuchung>2014-11-30T20:00:00</EndeBuchung>
