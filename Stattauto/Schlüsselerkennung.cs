@@ -26,7 +26,6 @@ namespace Stattauto
                     _innen = (TresorInnen)innen;
                 }
             }
-
         }
         public void PruefeEntnahme(StatusSchluessel status)
         {
@@ -35,20 +34,20 @@ namespace Stattauto
                 _innen.StopPiep();                
                 return;
             }
-	
+                       
 
-                if (_innen.ZuletztEntnommen == _tresor.AktiveBuchung.VorgesehenesFahrzeug && status == StatusSchluessel.entnommen)
-                {
-                    _tresor.SetDisplayText("Bitte Türe schließen");
-                }
-                else
-                {
-                    _tresor.SetDisplayText("Falschen Schlüssel entnommen!");
-                    _innen.StartPiep();                    
-                }
-            _tresor.Refresh(); 
+            if (_innen.ZuletztEntnommen == _tresor.AktiveBuchung.VorgesehenesFahrzeug && status == StatusSchluessel.entnommen)
+            {
+                _tresor.SetDisplayText("Bitte Türe schließen");
+                _tresor.RichtigerSchluesselStatus = StatusSchluessel.entnommen;
             }
-           
+            else
+            {
+                _tresor.SetDisplayText("Falschen Schlüssel entnommen!");
+                _innen.StartPiep();                    
+            }
+            _tresor.Refresh(); 
+            }           
     }
 }
 

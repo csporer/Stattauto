@@ -12,7 +12,7 @@ namespace Stattauto
         public Buchung()
         { }
 
-        public Buchung(int id, int pin, DateTime anfang, DateTime ende, int fahrzeug,bool gebrauch)
+        public Buchung(int id, int pin, DateTime anfang, DateTime ende, int fahrzeug,bool gebrauch, int tresorid)
         {
             NutzerID = id;
             PIN = pin;
@@ -20,6 +20,7 @@ namespace Stattauto
             EndeBuchung = ende;
             VorgesehenesFahrzeug = fahrzeug;
             FahrzeugInGebrauch = gebrauch;
+            TresorID = tresorid;
         }
 
         public int NutzerID { get; set; }
@@ -28,6 +29,7 @@ namespace Stattauto
         public DateTime EndeBuchung { get; set; }
         public int VorgesehenesFahrzeug { get; set; }
         public bool FahrzeugInGebrauch { get; set; }
+        public int TresorID {get; set;}
     }
 
     [Serializable]

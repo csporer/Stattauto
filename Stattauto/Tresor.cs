@@ -13,8 +13,7 @@ using System.Windows.Forms;
 namespace Stattauto
 {
     public partial class Tresor : Control
-    {
-        public static string xmlPfad = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),"Buchungen.xml");
+    {        
         private TextBox txteingabe = new TextBox();
         private Button btnsubmit = new Button();
         private Button btnschliessen = new Button();
@@ -23,7 +22,7 @@ namespace Stattauto
                 
         public Tresor()
         {
-            this.Height = 500;
+            this.Height = 400;
             this.Width = 300;
             this.AllowDrop = true;            
             InitializeComponent();
@@ -36,19 +35,6 @@ namespace Stattauto
             //Buchungen = XML.Load<Buchungsliste>(xmlPfad);
         }
 
-        private void ErstelleStandardbuchungsliste()
-        {
-            Buchung buch1 = new Buchung(1000, 1111, new DateTime(2014, 11, 30, 15, 00, 00), new DateTime(2014, 11, 30, 20, 00, 00), 1, false);
-            Buchung buch2 = new Buchung(2000, 2222, new DateTime(2014, 11, 30, 18, 00, 00), new DateTime(2014, 11, 30, 19, 00, 00), 2, false);
-
-            List<Buchung> Buchungen = new List<Buchung>();
-            Buchungen.Add(buch1);
-            Buchungen.Add(buch2);
-
-            Buchungsliste list = new Buchungsliste(Buchungen);
-
-            XML.Save<Buchungsliste>(xmlPfad, list);
-        }
 
         protected override void OnPaint(PaintEventArgs pe)
         {
@@ -80,12 +66,27 @@ namespace Stattauto
         {
             TresorOffen = false;
             innenleben.Enabled = false;
-            btnschliessen.Hide();
+            btnschliessen.Hide();            
             SetDisplayText("Willkommen bei Stattauto!");
             //txteingabe.Enabled = false;
             //btnsubmit.Enabled = false;
             innenleben.StopPiep();
             this.Refresh();
+
+            Buchungen.Buchungen.Remove(AktiveBuchung);
+            if (RichtigerSchluesselStatus == StatusSchluessel.entnommen)
+            {               
+                AktiveBuchung.FahrzeugInGebrauch = true;                
+            }
+            else
+            {                
+                AktiveBuchung.FahrzeugInGebrauch = false;              
+            }
+            
+            Buchungen.Buchungen.Add(AktiveBuchung);
+            XML.Save<Buchungsliste>(Pfade.xmlPfad, Buchungen);
+            if(Eingabefenster != null)
+                Eingabefenster.UpdateListe();
         }
 
         void btnsubmit_Click(object sender, EventArgs e)
@@ -93,19 +94,22 @@ namespace Stattauto
             int parsing;
             if (int.TryParse(txteingabe.Text, out parsing))
             {
-                EingabePIN = parsing;
+                EingabePIN = parsing;                
                 if (EingabePIN == AktiveBuchung.PIN)
                 {
                     switch (AktiveBuchung.VorgesehenesFahrzeug)
                     {
                         case 1:
                             innenleben.LEDFarbe1 = Color.Green;
+                            innenleben.LEDFarbe2 = innenleben.LEDFarbe3 = Color.Red;
                             break;
                         case 2:
                             innenleben.LEDFarbe2 = Color.Green;
+                            innenleben.LEDFarbe1 = innenleben.LEDFarbe3 = Color.Red;
                             break;
                         case 3:
                             innenleben.LEDFarbe3 = Color.Green;
+                            innenleben.LEDFarbe2 = innenleben.LEDFarbe1 = Color.Red;
                             break;
                         default:
                             break;
@@ -115,6 +119,7 @@ namespace Stattauto
                     SetDisplayText("Schlüssel entnehmen");
                     txteingabe.Enabled = false;
                     btnsubmit.Enabled = false;
+                    TimerPin.Stop();
                 }
                 else
                 {
@@ -152,8 +157,7 @@ namespace Stattauto
         {
             if (!TresorOffen)
             {
-                e.Effect = DragDropEffects.Copy; 
-                              
+                e.Effect = DragDropEffects.Copy;                               
             }
         }        
 
@@ -161,7 +165,7 @@ namespace Stattauto
         {
             try
             {
-                Buchungen = XML.Load<Buchungsliste>(xmlPfad);
+                Buchungen = XML.Load<Buchungsliste>(Pfade.xmlPfad);
 
 
                 if (e.Data.GetDataPresent(typeof(Kundenkarte)))
@@ -174,7 +178,7 @@ namespace Stattauto
                     {
                         vergleich1 = buch.EndeBuchung > Systemzeit;
                         vergleich2 = Systemzeit > buch.AnfangBuchung;
-                        if (buch.NutzerID == GeleseneID && vergleich1  && vergleich2)
+                        if (buch.NutzerID == GeleseneID && vergleich1  && vergleich2 && buch.TresorID == TresorID)
                         {
                             btnsubmit.Enabled = true;
                             txteingabe.Enabled = true;
@@ -209,9 +213,15 @@ namespace Stattauto
 
         public int GelesenePIN { get; private set; }
 
+        public int TresorID { get; set; }
+
         public DateTime Systemzeit { get; set; }
 
         public Buchung AktiveBuchung { get; private set; }
+
+        public StatusSchluessel RichtigerSchluesselStatus { get; set; }
+
+        public XMLEingabe Eingabefenster { get; set; }
 
         #endregion Parameter       
 
@@ -224,5 +234,6 @@ namespace Stattauto
             TimerPin.Stop();
             this.Refresh();
         }
+                
     }
 }

@@ -79,6 +79,12 @@
       <DependentUpon>TresorInnen.cs</DependentUpon>
     </Compile>
     <Compile Include="XML.cs" />
+    <Compile Include="XMLEingabe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="XMLEingabe.Designer.cs">
+      <DependentUpon>XMLEingabe.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Display.resx">
       <DependentUpon>Display.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,6 +110,11 @@
     <EmbeddedResource Include="TresorInnen.resx">
       <DependentUpon>TresorInnen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="XMLEingabe.resx">
+      <DependentUpon>XMLEingabe.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\DataSources\Buchung.datasource" />
+    <None Include="Properties\DataSources\Buchungsliste.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

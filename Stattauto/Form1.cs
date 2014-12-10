@@ -15,17 +15,17 @@ namespace Stattauto
     {
    
         public Form1()
-        {            
-            
+        { 
             InitializeComponent();
         }
 
         private void Uhrzeit_Tick(object sender, EventArgs e)
         {  
             tresor1.Systemzeit = dtpUhrzeit.Value = dtpUhrzeit.Value.AddSeconds(1);
+            tresor2.Systemzeit = dtpUhrzeit.Value = dtpUhrzeit.Value.AddSeconds(1);
             dtpUhrzeit.Refresh();
         }
-
+        
        
         private void cbUhrAn_CheckedChanged(object sender, EventArgs e)
         {
@@ -52,9 +52,10 @@ namespace Stattauto
 
         private void BtnXML_Click(object sender, EventArgs e)
         {
-            Process editor = new Process();
-            editor.StartInfo.FileName = Tresor.xmlPfad;
-            editor.Start();
+            XMLEingabe eingabe = new XMLEingabe();
+            tresor1.Eingabefenster = eingabe;
+            tresor2.Eingabefenster = eingabe;
+            eingabe.Show();            
         }
 
       
