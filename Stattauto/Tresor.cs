@@ -193,6 +193,8 @@ namespace Stattauto
 
                     TimerKeineBuchung.Start();
                     SetDisplayText("Keine Buchung vorhanden!");
+                    btnsubmit.Enabled = false;
+                    txteingabe.Enabled = false;
                 }
             }
             catch (Exception exc)
