@@ -22,7 +22,7 @@ namespace Stattauto
         private void Uhrzeit_Tick(object sender, EventArgs e)
         {  
             tresor1.Systemzeit = dtpUhrzeit.Value = dtpUhrzeit.Value.AddSeconds(1);
-            tresor2.Systemzeit = dtpUhrzeit.Value = dtpUhrzeit.Value.AddSeconds(1);
+            tresor2.Systemzeit = dtpUhrzeit.Value;
             dtpUhrzeit.Refresh();
         }
         
