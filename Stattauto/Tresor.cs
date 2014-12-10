@@ -74,6 +74,7 @@ namespace Stattauto
             this.Refresh();
 
             Buchungen.Buchungen.Remove(AktiveBuchung);
+
             if (RichtigerSchluesselStatus == StatusSchluessel.entnommen)
             {               
                 AktiveBuchung.FahrzeugInGebrauch = true;                

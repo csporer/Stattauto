@@ -29,12 +29,17 @@ namespace Stattauto
         }
         public void PruefeEntnahme(StatusSchluessel status)
         {
+            if (_innen.ZuletztEntnommen == _tresor.AktiveBuchung.VorgesehenesFahrzeug && status == StatusSchluessel.vorhanden)
+            {
+                _tresor.RichtigerSchluesselStatus = StatusSchluessel.vorhanden;
+            }
+
             if (_innen.ZuletztZurueck == _innen.ZuletztEntnommen && status == StatusSchluessel.vorhanden)
             {
                 _innen.StopPiep();                
                 return;
             }
-                       
+
 
             if (_innen.ZuletztEntnommen == _tresor.AktiveBuchung.VorgesehenesFahrzeug && status == StatusSchluessel.entnommen)
             {
