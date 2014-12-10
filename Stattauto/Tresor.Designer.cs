@@ -33,12 +33,14 @@ namespace Stattauto
             this.TimerPin = new System.Windows.Forms.Timer(this.components);
             this.innenleben = new Stattauto.TresorInnen();
             this.display = new Stattauto.Display();
+            this.TimerKeineBuchung = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // TimerPin
             // 
             this.TimerPin.Interval = 5000;
-            this.TimerPin.Tick += new System.EventHandler(this.TimerPin_Tick);
+            this.TimerPin.Tag = "Pin";
+            this.TimerPin.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // innenleben
             // 
@@ -63,6 +65,12 @@ namespace Stattauto
             this.display.Size = new System.Drawing.Size(352, 39);
             this.display.TabIndex = 0;
             this.display.Textfarbe = System.Drawing.Color.Empty;
+            // 
+            // TimerKeineBuchung
+            // 
+            this.TimerKeineBuchung.Interval = 5000;
+            this.TimerKeineBuchung.Tag = "KeineBuchung";
+            this.TimerKeineBuchung.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // Tresor
             // 
@@ -115,6 +123,7 @@ namespace Stattauto
         private TresorInnen innenleben;
         private Display display;
         private System.Windows.Forms.Timer TimerPin;
+        private System.Windows.Forms.Timer TimerKeineBuchung;
 
     }
 }

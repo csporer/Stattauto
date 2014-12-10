@@ -191,6 +191,7 @@ namespace Stattauto
                         }
                     }
 
+                    TimerKeineBuchung.Start();
                     SetDisplayText("Keine Buchung vorhanden!");
                 }
             }
@@ -226,15 +227,22 @@ namespace Stattauto
 
         #endregion Parameter       
 
-        private void TimerPin_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             SetDisplayText("Willkommen bei Stattauto!");
             txteingabe.Enabled = false;
             btnsubmit.Enabled = false;
+            if (((Timer)sender).Tag.ToString() == "Pin")
+            {
+                TimerPin.Stop();
+            }
+            else
+	        {
+                TimerKeineBuchung.Stop();
+	        }
             
-            TimerPin.Stop();
             this.Refresh();
         }
-                
+    
     }
 }

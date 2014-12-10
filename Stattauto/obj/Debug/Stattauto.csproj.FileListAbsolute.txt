@@ -11,3 +11,4 @@ E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Debug\Statt
 E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Debug\Stattauto.TresorInnen.resources
 E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Debug\Stattauto.Display.resources
 E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Debug\Stattauto.XMLEingabe.resources
+E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Debug\Stattauto.csprojResolveAssemblyReference.cache
