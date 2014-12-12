@@ -31,9 +31,10 @@ namespace Stattauto
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Tresor));
             this.TimerPin = new System.Windows.Forms.Timer(this.components);
-            this.innenleben = new Stattauto.TresorInnen();
+            this._innenleben = new Stattauto.TresorInnen();
             this.display = new Stattauto.Display();
             this.TimerKeineBuchung = new System.Windows.Forms.Timer(this.components);
+            this.TimerTresoroffen = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // TimerPin
@@ -44,17 +45,14 @@ namespace Stattauto
             // 
             // innenleben
             // 
-            this.innenleben.Enabled = false;
-            this.innenleben.LEDFarbe1 = System.Drawing.Color.Red;
-            this.innenleben.LEDFarbe2 = System.Drawing.Color.Red;
-            this.innenleben.LEDFarbe3 = System.Drawing.Color.Red;
-            this.innenleben.Location = new System.Drawing.Point(0, 250);
-            this.innenleben.Name = "innenleben";
-            this.innenleben.Schluessel1 = Stattauto.StatusSchluessel.vorhanden;
-            this.innenleben.Schluessel2 = Stattauto.StatusSchluessel.vorhanden;
-            this.innenleben.Schluessel3 = Stattauto.StatusSchluessel.vorhanden;
-            this.innenleben.Size = new System.Drawing.Size(248, 119);
-            this.innenleben.TabIndex = 0;
+            this._innenleben.Enabled = false;
+            this._innenleben.LEDFarbe1 = System.Drawing.Color.Red;
+            this._innenleben.LEDFarbe2 = System.Drawing.Color.Red;
+            this._innenleben.LEDFarbe3 = System.Drawing.Color.Red;
+            this._innenleben.Location = new System.Drawing.Point(0, 250);
+            this._innenleben.Name = "innenleben";                     
+            this._innenleben.Size = new System.Drawing.Size(248, 119);
+            this._innenleben.TabIndex = 0;
             // 
             // display
             // 
@@ -72,9 +70,14 @@ namespace Stattauto
             this.TimerKeineBuchung.Tag = "KeineBuchung";
             this.TimerKeineBuchung.Tick += new System.EventHandler(this.Timer_Tick);
             // 
+            // TimerTresoroffen
+            // 
+            this.TimerTresoroffen.Interval = 20000;
+            this.TimerTresoroffen.Tick += new System.EventHandler(this.TimerTresoroffen_Tick);
+            // 
             // Tresor
             // 
-            this.Controls.Add(this.innenleben);
+            this.Controls.Add(this._innenleben);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Tresor_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Tresor_DragEnter);
             this.ResumeLayout(false);
@@ -120,10 +123,11 @@ namespace Stattauto
         }
 
        
-        private TresorInnen innenleben;
+        private TresorInnen _innenleben;
         private Display display;
         private System.Windows.Forms.Timer TimerPin;
         private System.Windows.Forms.Timer TimerKeineBuchung;
+        private System.Windows.Forms.Timer TimerTresoroffen;
 
     }
 }

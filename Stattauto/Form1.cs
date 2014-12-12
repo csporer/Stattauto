@@ -57,8 +57,6 @@ namespace Stattauto
             tresor2.Eingabefenster = eingabe;
             eingabe.Show();            
         }
-
-      
-              
+  
     }
 }

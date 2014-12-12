@@ -60,10 +60,10 @@ namespace Stattauto
         }
 
 
-        private void ErstelleStandardbuchungsliste()
+        public static void ErstelleStandardbuchungsliste()
         {
-            Buchung buch1 = new Buchung(1000, 1111, new DateTime(2014, 11, 30, 15, 00, 00), new DateTime(2014, 11, 30, 20, 00, 00), 1, false, 1);
-            Buchung buch2 = new Buchung(2000, 2222, new DateTime(2014, 11, 30, 18, 00, 00), new DateTime(2014, 11, 30, 19, 00, 00), 2, false, 2);
+            Buchung buch1 = new Buchung(1000, 1111, DateTime.Now, DateTime.Now.AddDays(1), 1, false, 1);
+            Buchung buch2 = new Buchung(2000, 2222, DateTime.Now, DateTime.Now.AddDays(1), 2, false, 2);
 
             List<Buchung> Buchungen = new List<Buchung>();
             Buchungen.Add(buch1);

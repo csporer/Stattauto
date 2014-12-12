@@ -11,3 +11,4 @@ E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Release\Sta
 E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Release\Stattauto.csproj.GenerateResource.Cache
 E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Release\Stattauto.exe
 E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Release\Stattauto.pdb
+E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Release\Stattauto.csprojResolveAssemblyReference.cache
