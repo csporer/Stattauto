@@ -27,7 +27,7 @@ namespace Stattauto
             InitializeComponent();
             InitEigeneElemente();
             _innenleben.SetTresor(this);            
-            SetDisplayText("Willkommen bei Stattauto!");            
+            SetDisplayText(Displaytext.Wilkommen);            
             if (!File.Exists(Pfade.xmlPfad))
 	        {
 		        XMLEingabe.ErstelleStandardbuchungsliste();
@@ -70,7 +70,7 @@ namespace Stattauto
             SchliesseTresor();
             _innenleben.Enabled = false;
             btnschliessen.Hide();            
-            SetDisplayText("Willkommen bei Stattauto!");
+            SetDisplayText(Displaytext.Wilkommen);
             //txteingabe.Enabled = false;
             //btnsubmit.Enabled = false;
             _innenleben.StopPiep();
@@ -125,7 +125,7 @@ namespace Stattauto
                 }
                 else
                 {
-                    SetDisplayText("Falsche PIN eingegeben");
+                    SetDisplayText(Displaytext.FalscherPin);
                     System.Media.SystemSounds.Beep.Play();
                 }
             }
@@ -154,6 +154,8 @@ namespace Stattauto
 
         private void OeffneTresor()
         {
+            TimerPin.Stop();
+            TimerKeineBuchung.Stop();
             TresorOffen = true;
             TimerTresoroffen.Start();
             _innenleben.TresorGeoeffnet();
@@ -162,7 +164,7 @@ namespace Stattauto
         private void SchliesseTresor()
         {
             TresorOffen = false;
-            TimerTresoroffen.Stop();
+            TimerTresoroffen.Stop();            
             _innenleben.StopPiep();
             _innenleben.TresorGeschlossen();
         }
@@ -199,16 +201,21 @@ namespace Stattauto
                     GeleseneID = ((Kundenkarte)e.Data.GetData(typeof(Kundenkarte))).KundenID;
                     GelesenePIN = ((Kundenkarte)e.Data.GetData(typeof(Kundenkarte))).PIN;
 
-                    bool vergleich1, vergleich2;
+                    bool startZeit, endZeit;
                     foreach (Buchung buch in _buchungen.Buchungen)
                     {
-                        vergleich1 = buch.EndeBuchung > Systemzeit;
-                        vergleich2 = Systemzeit > buch.AnfangBuchung;
-                        if (buch.NutzerID == GeleseneID && vergleich1  && vergleich2 && buch.TresorID == TresorID)
+                        endZeit = buch.EndeBuchung > Systemzeit;
+                        startZeit = Systemzeit > buch.AnfangBuchung;
+                        if (buch.FahrzeugInGebrauch)
+                        {
+                            endZeit = startZeit = true;
+                        }
+
+                        if (buch.NutzerID == GeleseneID && startZeit && endZeit && buch.TresorID == TresorID)
                         {
                             EnablePin(true);
                             AktiveBuchung = buch;
-                            SetDisplayText("Bitte geben Sie ihren PIN ein...");
+                            SetDisplayText(Displaytext.PINeingabe);
                             TimerPin.Start();
                             this.Refresh();
                             return;
@@ -216,14 +223,14 @@ namespace Stattauto
                     }
 
                     TimerKeineBuchung.Start();
-                    SetDisplayText("Keine Buchung vorhanden!");
+                    SetDisplayText(Displaytext.KeineBuchung);
                     EnablePin(false);
                 }
             }
             catch (Exception exc)
             {
                 _buchungen = null;                
-                MessageBox.Show("XML Eingabe prüfen: \n" + exc.InnerException.Message.ToString());
+                MessageBox.Show("XML Eingabe prüfen: \n" + exc.Message.ToString());
             }
             
         }
@@ -253,7 +260,7 @@ namespace Stattauto
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            SetDisplayText("Willkommen bei Stattauto!");
+            SetDisplayText(Displaytext.Wilkommen);
             EnablePin(false);
             if (((Timer)sender).Tag.ToString() == "Pin")
             {

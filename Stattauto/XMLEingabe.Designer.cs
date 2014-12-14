@@ -52,13 +52,13 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.Size = new System.Drawing.Size(777, 156);
+            this.dataGridView1.Size = new System.Drawing.Size(926, 156);
             this.dataGridView1.TabIndex = 0;
             // 
             // BtnSpeichern
             // 
             this.BtnSpeichern.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnSpeichern.Location = new System.Drawing.Point(699, 174);
+            this.BtnSpeichern.Location = new System.Drawing.Point(848, 174);
             this.BtnSpeichern.Name = "BtnSpeichern";
             this.BtnSpeichern.Size = new System.Drawing.Size(85, 35);
             this.BtnSpeichern.TabIndex = 1;
@@ -81,7 +81,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(796, 222);
+            this.ClientSize = new System.Drawing.Size(945, 222);
             this.Controls.Add(this.BtnStandard);
             this.Controls.Add(this.BtnSpeichern);
             this.Controls.Add(this.dataGridView1);

@@ -39,18 +39,22 @@ namespace Stattauto
             // 
             // TimerPin
             // 
-            this.TimerPin.Interval = 5000;
+            this.TimerPin.Interval = 10000;
             this.TimerPin.Tag = "Pin";
             this.TimerPin.Tick += new System.EventHandler(this.Timer_Tick);
             // 
-            // innenleben
+            // _innenleben
             // 
             this._innenleben.Enabled = false;
             this._innenleben.LEDFarbe1 = System.Drawing.Color.Red;
             this._innenleben.LEDFarbe2 = System.Drawing.Color.Red;
             this._innenleben.LEDFarbe3 = System.Drawing.Color.Red;
             this._innenleben.Location = new System.Drawing.Point(0, 250);
-            this._innenleben.Name = "innenleben";                     
+            this._innenleben.Name = "_innenleben";
+            this._innenleben.Schluessel = new Stattauto.StatusSchluessel[] {
+        Stattauto.StatusSchluessel.vorhanden,
+        Stattauto.StatusSchluessel.vorhanden,
+        Stattauto.StatusSchluessel.vorhanden};
             this._innenleben.Size = new System.Drawing.Size(248, 119);
             this._innenleben.TabIndex = 0;
             // 
@@ -66,13 +70,13 @@ namespace Stattauto
             // 
             // TimerKeineBuchung
             // 
-            this.TimerKeineBuchung.Interval = 5000;
+            this.TimerKeineBuchung.Interval = 10000;
             this.TimerKeineBuchung.Tag = "KeineBuchung";
             this.TimerKeineBuchung.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // TimerTresoroffen
             // 
-            this.TimerTresoroffen.Interval = 20000;
+            this.TimerTresoroffen.Interval = 30000;
             this.TimerTresoroffen.Tick += new System.EventHandler(this.TimerTresoroffen_Tick);
             // 
             // Tresor

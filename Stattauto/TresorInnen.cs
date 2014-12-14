@@ -13,26 +13,22 @@ namespace Stattauto
     public partial class TresorInnen : UserControl
     {
         private Tresor _tresor = null;
-        private Schlüsselerkennung _schluesselerkennung;              
+        private Schlüsselerkennung _schluesselerkennung;
+        private bool _entnahme = true;
+    
        
         public TresorInnen()
         {
             InitializeComponent();
             LEDFarbe1 = LEDFarbe2 = LEDFarbe3 = Color.Red;
-            Schluessel1 = Schluessel2 = Schluessel3 = StatusSchluessel.vorhanden;            
+            Schluessel = new StatusSchluessel[3];        
         }
 
         public Color LEDFarbe1 { get; set; }
         public Color LEDFarbe2 { get; set; }
         public Color LEDFarbe3 { get; set; }
 
-        public StatusSchluessel Schluessel1 { get; set; }
-        public StatusSchluessel Schluessel2 { get; set; }
-        public StatusSchluessel Schluessel3 { get; set; }
-
-        public int ZuletztEntnommen { get; private set; }
-
-        public int ZuletztZurueck { get; private set; }
+        public StatusSchluessel[] Schluessel { get; set; }       
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -43,9 +39,9 @@ namespace Stattauto
             g.FillEllipse(new SolidBrush(LEDFarbe2), new Rectangle(new Point(btnSchlu2.Location.X + (btnSchlu2.Size.Width / 2) - ledSize / 2, btnSchlu2.Location.Y - 50), new Size(ledSize, ledSize)));
             g.FillEllipse(new SolidBrush(LEDFarbe3), new Rectangle(new Point(btnSchlu3.Location.X + (btnSchlu3.Size.Width / 2) - ledSize / 2, btnSchlu3.Location.Y - 50), new Size(ledSize, ledSize)));
 
-            lblSchlu1.Text = Schluessel1.ToString();
-            lblSchlu2.Text = Schluessel2.ToString();
-            lblSchlu3.Text = Schluessel3.ToString();
+            lblSchlu1.Text = Schluessel[0].ToString();
+            lblSchlu2.Text = Schluessel[1].ToString();
+            lblSchlu3.Text = Schluessel[2].ToString();
             base.OnPaint(e);
         }
 
@@ -61,50 +57,67 @@ namespace Stattauto
             _schluesselerkennung = new Schlüsselerkennung(_tresor);
         }
 
-
-        private void btnSchlu1_CheckedChanged(object sender, EventArgs e)
+        public void TresorGeoeffnet()
         {
-            if (btnSchlu1.Checked)
+            if (Schluessel[_tresor.AktiveBuchung.VorgesehenesFahrzeug-1] == StatusSchluessel.vorhanden )
             {
-                Schluessel1 = StatusSchluessel.entnommen;
-                ZuletztEntnommen = 1;                
+                _tresor.SetDisplayText(Displaytext.Entnahme);
+                _entnahme = true;
             }
             else
             {
-                Schluessel1 = StatusSchluessel.vorhanden;
-                ZuletztZurueck = 1;
+                _tresor.SetDisplayText(Displaytext.Rueckgabe);
+                _entnahme = false;
             }
-            _schluesselerkennung.PruefeEntnahme(Schluessel1);
+            
         }
 
-        private void btnSchlu2_CheckedChanged(object sender, EventArgs e)
+        public void TresorGeschlossen()
         {
-            if (btnSchlu2.Checked)
-            {
-                Schluessel2 = StatusSchluessel.entnommen;
-                ZuletztEntnommen = 2;                
-            }
-            else
-            {
-                Schluessel2 = StatusSchluessel.vorhanden;
-                ZuletztZurueck = 2;
-            }
-            _schluesselerkennung.PruefeEntnahme(Schluessel2);
+            _schluesselerkennung.MerkeSchluesselStatus();
         }
 
-        private void btnSchlu3_CheckedChanged(object sender, EventArgs e)
+        private void btnSchlu_CheckedChanged(object sender, EventArgs e)
         {
-            if (btnSchlu3.Checked)
+            CheckBox _sender = (CheckBox)sender;
+            StatusSchluessel status;
+            
+
+            if (_sender.Checked)
             {
-                ZuletztEntnommen = 3;
-                Schluessel3 = StatusSchluessel.entnommen;                
+                status = StatusSchluessel.entnommen; 
+            }
+            else
+	        {
+                status = StatusSchluessel.vorhanden;
+	        }
+
+            Schluessel[Convert.ToInt16(_sender.Tag)-1] = status;
+
+            if(!_schluesselerkennung.RichtigeEntnahme())
+            {
+                _tresor.SetDisplayText(Displaytext.FalschEntnommen);
+                StartPiep();
             }
             else
             {
-                Schluessel3 = StatusSchluessel.vorhanden;
-                ZuletztZurueck = 3;
+                StopPiep();
+                if (_tresor.AktiveBuchung.FahrzeugInGebrauch && Schluessel[_tresor.AktiveBuchung.VorgesehenesFahrzeug-1] == StatusSchluessel.entnommen)
+                {
+                    if(!_entnahme)
+                        _tresor.SetDisplayText(Displaytext.Rueckgabe);
+                }
+                else if (!_tresor.AktiveBuchung.FahrzeugInGebrauch && Schluessel[_tresor.AktiveBuchung.VorgesehenesFahrzeug - 1] == StatusSchluessel.vorhanden)
+                {
+                    if (_entnahme)
+                    {
+                        _tresor.SetDisplayText(Displaytext.Entnahme);
+                    }
+                    
+                }
+                else
+                    _tresor.SetDisplayText(Displaytext.Schließen);
             }
-            _schluesselerkennung.PruefeEntnahme(Schluessel3);
         }
 
         private void TimerEntnahme_Tick(object sender, EventArgs e)

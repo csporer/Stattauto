@@ -9,12 +9,15 @@ namespace Stattauto
     class Schlüsselerkennung
     {
         private Tresor _tresor;
-        private TresorInnen _innen;        
+        private TresorInnen _innen;
+        private StatusSchluessel[] _alt;        
         
         public Schlüsselerkennung(Tresor tresor)
         {
             _tresor = tresor;
             SetInnenleben();
+            _alt = new StatusSchluessel[3];
+            MerkeSchluesselStatus();
         }
 
         private void SetInnenleben()
@@ -27,32 +30,30 @@ namespace Stattauto
                 }
             }
         }
-        public void PruefeEntnahme(StatusSchluessel status)
+
+        public bool RichtigeEntnahme()
         {
-            if (_innen.ZuletztEntnommen == _tresor.AktiveBuchung.VorgesehenesFahrzeug && status == StatusSchluessel.vorhanden)
+            bool value = true;
+            for (int i = 0; i < 3; i++)
             {
-                _tresor.RichtigerSchluesselStatus = StatusSchluessel.vorhanden;
-            }
+                if (i+1 != _tresor.AktiveBuchung.VorgesehenesFahrzeug)
+                {
+                    if (_alt[i] != _innen.Schluessel[i])
+                    {                        
+                        value = false;
+                    }
+                }  
+            }            
+            return value;
+        }
 
-            if (_innen.ZuletztZurueck == _innen.ZuletztEntnommen && status == StatusSchluessel.vorhanden)
+        public void MerkeSchluesselStatus()
+        {
+            for (int i = 0; i < 3; i++)
             {
-                _innen.StopPiep();                
-                return;
+                _alt[i] = _innen.Schluessel[i];
             }
-
-
-            if (_innen.ZuletztEntnommen == _tresor.AktiveBuchung.VorgesehenesFahrzeug && status == StatusSchluessel.entnommen)
-            {
-                _tresor.SetDisplayText("Bitte Türe schließen");
-                _tresor.RichtigerSchluesselStatus = StatusSchluessel.entnommen;
-            }
-            else
-            {
-                _tresor.SetDisplayText("Falschen Schlüssel entnommen!");
-                _innen.StartPiep();                    
-            }
-            _tresor.Refresh(); 
-            }           
+        }
     }
 }
 

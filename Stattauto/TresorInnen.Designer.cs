@@ -78,7 +78,7 @@
             this.btnSchlu1.Tag = "1";
             this.btnSchlu1.Text = "Schlüssel 1";
             this.btnSchlu1.UseVisualStyleBackColor = true;
-            this.btnSchlu1.CheckedChanged += new System.EventHandler(this.btnSchlu1_CheckedChanged);
+            this.btnSchlu1.CheckedChanged += new System.EventHandler(this.btnSchlu_CheckedChanged);
             // 
             // btnSchlu2
             // 
@@ -91,7 +91,7 @@
             this.btnSchlu2.Tag = "2";
             this.btnSchlu2.Text = "Schlüssel 2";
             this.btnSchlu2.UseVisualStyleBackColor = true;
-            this.btnSchlu2.CheckedChanged += new System.EventHandler(this.btnSchlu2_CheckedChanged);
+            this.btnSchlu2.CheckedChanged += new System.EventHandler(this.btnSchlu_CheckedChanged);
             // 
             // btnSchlu3
             // 
@@ -104,7 +104,7 @@
             this.btnSchlu3.Tag = "3";
             this.btnSchlu3.Text = "Schlüssel 3";
             this.btnSchlu3.UseVisualStyleBackColor = true;
-            this.btnSchlu3.CheckedChanged += new System.EventHandler(this.btnSchlu3_CheckedChanged);
+            this.btnSchlu3.CheckedChanged += new System.EventHandler(this.btnSchlu_CheckedChanged);
             // 
             // label1
             // 
