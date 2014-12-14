@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Stattauto.exe" size="923648">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Stattauto.exe" size="928768">
       <assemblyIdentity name="Stattauto" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>rLZKE0RO8VmHGNuVXc4BU76jPAiCqo8GanFi4jEP5QU=</dsig:DigestValue>
+        <dsig:DigestValue>AkNRX7dDndfbDn2EtulNzRY5itUpLTGwhzTH8g2pjNU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

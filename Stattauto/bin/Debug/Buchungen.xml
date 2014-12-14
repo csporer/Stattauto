@@ -15,7 +15,7 @@
       <PIN>2222</PIN>
       <AnfangBuchung>2014-12-14T22:53:24</AnfangBuchung>
       <EndeBuchung>2014-12-15T22:53:24</EndeBuchung>
-      <VorgesehenesFahrzeug>2</VorgesehenesFahrzeug>
+      <VorgesehenesFahrzeug>3</VorgesehenesFahrzeug>
       <FahrzeugInGebrauch>false</FahrzeugInGebrauch>
       <TresorID>2</TresorID>
     </Buchung>

@@ -29,10 +29,13 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XMLEingabe));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.BtnSpeichern = new System.Windows.Forms.Button();
             this.BtnStandard = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -77,19 +80,33 @@
             this.BtnStandard.UseVisualStyleBackColor = true;
             this.BtnStandard.Click += new System.EventHandler(this.BtnStandard_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.pictureBox1.Image = global::Stattauto.Properties.Resources.LogoCTechnologyGroßPNG;
+            this.pictureBox1.Location = new System.Drawing.Point(327, 170);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(290, 50);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
             // XMLEingabe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(945, 222);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.BtnStandard);
             this.Controls.Add(this.BtnSpeichern);
             this.Controls.Add(this.dataGridView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(812, 261);
             this.Name = "XMLEingabe";
             this.Text = "XMLEingabe";
             this.Load += new System.EventHandler(this.XMLEingabe_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -98,6 +115,7 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button BtnSpeichern;
-        private System.Windows.Forms.Button BtnStandard;        
+        private System.Windows.Forms.Button BtnStandard;
+        private System.Windows.Forms.PictureBox pictureBox1;        
     }
 }
