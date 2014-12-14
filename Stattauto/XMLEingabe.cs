@@ -61,9 +61,11 @@ namespace Stattauto
 
 
         public static void ErstelleStandardbuchungsliste()
-        {
-            Buchung buch1 = new Buchung(1000, 1111, DateTime.Now, DateTime.Now.AddDays(1), 1, false, 1);
-            Buchung buch2 = new Buchung(2000, 2222, DateTime.Now, DateTime.Now.AddDays(1), 2, false, 2);
+        {            
+            string anfang = string.Format("{0:d/M/yyyy HH:mm:ss}", DateTime.Now);
+            string ende = string.Format("{0:d/M/yyyy HH:mm:ss}", DateTime.Now.AddDays(1));
+            Buchung buch1 = new Buchung(1000, 1111, Convert.ToDateTime(anfang), Convert.ToDateTime(ende), 1, false, 1);
+            Buchung buch2 = new Buchung(2000, 2222, Convert.ToDateTime(anfang), Convert.ToDateTime(ende), 2, false, 2);
 
             List<Buchung> Buchungen = new List<Buchung>();
             Buchungen.Add(buch1);

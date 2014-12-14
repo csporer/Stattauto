@@ -56,15 +56,12 @@ namespace Stattauto
                 saved = (T)ser.Deserialize(sr);
                 sr.Close();
             }
-            catch (Exception exc)
+            catch (Exception)
             {
                 sr.Close();
-                throw exc;
-            }
-            
+                throw;
+            }            
             return saved;
-
         }
-
     }
 }

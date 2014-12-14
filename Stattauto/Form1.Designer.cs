@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.BtnXML = new System.Windows.Forms.Button();
             this.dtpUhrzeit = new System.Windows.Forms.DateTimePicker();
@@ -153,6 +154,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(736, 518);
             this.Controls.Add(this.tresor2);
             this.Controls.Add(this.kundenkarte3);
@@ -160,7 +162,9 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tresor1);
             this.Controls.Add(this.kundenkarte1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Demo Stattauto";
             this.Load += new System.EventHandler(this.Form1_Load);

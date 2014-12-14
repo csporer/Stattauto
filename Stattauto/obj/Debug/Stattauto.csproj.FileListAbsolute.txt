@@ -12,3 +12,8 @@ E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Debug\Statt
 E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Debug\Stattauto.Display.resources
 E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Debug\Stattauto.XMLEingabe.resources
 E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Debug\Stattauto.csprojResolveAssemblyReference.cache
+E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\bin\Debug\Stattauto.exe.manifest
+E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\bin\Debug\Stattauto.application
+E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Debug\Stattauto.TrustInfo.xml
+E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Debug\Stattauto.exe.manifest
+E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Debug\Stattauto.application
