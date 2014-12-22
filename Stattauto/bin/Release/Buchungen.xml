@@ -4,8 +4,8 @@
     <Buchung>
       <NutzerID>2000</NutzerID>
       <PIN>2222</PIN>
-      <AnfangBuchung>2014-12-12T22:38:55.7346394+01:00</AnfangBuchung>
-      <EndeBuchung>2014-12-13T22:38:55.7346394+01:00</EndeBuchung>
+      <AnfangBuchung>2014-12-14T23:24:24</AnfangBuchung>
+      <EndeBuchung>2014-12-15T23:24:24</EndeBuchung>
       <VorgesehenesFahrzeug>2</VorgesehenesFahrzeug>
       <FahrzeugInGebrauch>false</FahrzeugInGebrauch>
       <TresorID>2</TresorID>
@@ -13,10 +13,10 @@
     <Buchung>
       <NutzerID>1000</NutzerID>
       <PIN>1111</PIN>
-      <AnfangBuchung>2014-12-12T22:38:55.7346394+01:00</AnfangBuchung>
-      <EndeBuchung>2014-12-13T22:38:55.7346394+01:00</EndeBuchung>
+      <AnfangBuchung>2014-12-14T23:24:24</AnfangBuchung>
+      <EndeBuchung>2014-12-15T23:24:24</EndeBuchung>
       <VorgesehenesFahrzeug>1</VorgesehenesFahrzeug>
-      <FahrzeugInGebrauch>true</FahrzeugInGebrauch>
+      <FahrzeugInGebrauch>false</FahrzeugInGebrauch>
       <TresorID>1</TresorID>
     </Buchung>
   </Buchungen>

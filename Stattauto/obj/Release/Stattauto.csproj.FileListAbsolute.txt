@@ -16,3 +16,4 @@ E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\bin\Release\Sta
 E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Release\Stattauto.TrustInfo.xml
 E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Release\Stattauto.exe.manifest
 E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Release\Stattauto.application
+E:\FH München\WS 14-15\Software Engineering\Stattauto\Stattauto\obj\Release\Stattauto.csprojResolveAssemblyReference.cache

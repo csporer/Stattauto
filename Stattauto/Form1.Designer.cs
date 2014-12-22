@@ -48,7 +48,7 @@
             this.groupBox1.Controls.Add(this.BtnXML);
             this.groupBox1.Controls.Add(this.dtpUhrzeit);
             this.groupBox1.Controls.Add(this.cbUhrAn);
-            this.groupBox1.Location = new System.Drawing.Point(427, 12);
+            this.groupBox1.Location = new System.Drawing.Point(485, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(222, 74);
             this.groupBox1.TabIndex = 2;
@@ -57,11 +57,11 @@
             // 
             // BtnXML
             // 
-            this.BtnXML.Location = new System.Drawing.Point(141, 45);
+            this.BtnXML.Location = new System.Drawing.Point(131, 45);
             this.BtnXML.Name = "BtnXML";
-            this.BtnXML.Size = new System.Drawing.Size(75, 23);
+            this.BtnXML.Size = new System.Drawing.Size(85, 23);
             this.BtnXML.TabIndex = 3;
-            this.BtnXML.Text = "XML öffnen";
+            this.BtnXML.Text = "Buchungsliste";
             this.BtnXML.UseVisualStyleBackColor = true;
             this.BtnXML.Click += new System.EventHandler(this.BtnXML_Click);
             // 
@@ -154,7 +154,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(736, 518);
             this.Controls.Add(this.tresor2);
             this.Controls.Add(this.kundenkarte3);
@@ -166,7 +166,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Demo Stattauto";
+            this.Text = "Demo Stattauto C Technology";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
