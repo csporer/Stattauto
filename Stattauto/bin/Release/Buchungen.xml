@@ -2,22 +2,22 @@
 <Buchungsliste xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Buchungen>
     <Buchung>
+      <NutzerID>1000</NutzerID>
+      <PIN>1111</PIN>
+      <AnfangBuchung>2014-12-21T18:01:05</AnfangBuchung>
+      <EndeBuchung>2014-12-22T18:01:05</EndeBuchung>
+      <VorgesehenesFahrzeug>1</VorgesehenesFahrzeug>
+      <FahrzeugInGebrauch>false</FahrzeugInGebrauch>
+      <TresorID>1</TresorID>
+    </Buchung>
+    <Buchung>
       <NutzerID>2000</NutzerID>
       <PIN>2222</PIN>
-      <AnfangBuchung>2014-12-12T22:38:55.7346394+01:00</AnfangBuchung>
-      <EndeBuchung>2014-12-13T22:38:55.7346394+01:00</EndeBuchung>
+      <AnfangBuchung>2014-12-21T18:01:05</AnfangBuchung>
+      <EndeBuchung>2014-12-22T18:01:05</EndeBuchung>
       <VorgesehenesFahrzeug>2</VorgesehenesFahrzeug>
       <FahrzeugInGebrauch>false</FahrzeugInGebrauch>
       <TresorID>2</TresorID>
-    </Buchung>
-    <Buchung>
-      <NutzerID>1000</NutzerID>
-      <PIN>1111</PIN>
-      <AnfangBuchung>2014-12-12T22:38:55.7346394+01:00</AnfangBuchung>
-      <EndeBuchung>2014-12-13T22:38:55.7346394+01:00</EndeBuchung>
-      <VorgesehenesFahrzeug>1</VorgesehenesFahrzeug>
-      <FahrzeugInGebrauch>true</FahrzeugInGebrauch>
-      <TresorID>1</TresorID>
     </Buchung>
   </Buchungen>
 </Buchungsliste>

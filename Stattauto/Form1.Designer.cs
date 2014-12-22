@@ -57,11 +57,11 @@
             // 
             // BtnXML
             // 
-            this.BtnXML.Location = new System.Drawing.Point(141, 45);
+            this.BtnXML.Location = new System.Drawing.Point(131, 45);
             this.BtnXML.Name = "BtnXML";
-            this.BtnXML.Size = new System.Drawing.Size(75, 23);
+            this.BtnXML.Size = new System.Drawing.Size(85, 23);
             this.BtnXML.TabIndex = 3;
-            this.BtnXML.Text = "XML öffnen";
+            this.BtnXML.Text = "Buchungsliste";
             this.BtnXML.UseVisualStyleBackColor = true;
             this.BtnXML.Click += new System.EventHandler(this.BtnXML_Click);
             // 
@@ -166,7 +166,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Demo Stattauto";
+            this.Text = "C-Technology Stattauto";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

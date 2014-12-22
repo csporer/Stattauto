@@ -103,7 +103,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(812, 261);
             this.Name = "XMLEingabe";
-            this.Text = "XMLEingabe";
+            this.Text = "Buchungsliste";
             this.Load += new System.EventHandler(this.XMLEingabe_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
