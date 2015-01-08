@@ -194,7 +194,8 @@ namespace Stattauto
             try
             {
                 _buchungen = XML.Load<Buchungsliste>(Pfade.xmlPfad);
-
+                TimerPin.Stop();
+                TimerKeineBuchung.Stop();
 
                 if (e.Data.GetDataPresent(typeof(Kundenkarte)))
                 {
